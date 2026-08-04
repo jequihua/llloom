@@ -1,0 +1,1630 @@
+{
+  "manifest_schema": "llloom.okf_pages_fixture_manifest",
+  "manifest_version": "1",
+  "profile_candidate": "0.1-rc.1",
+  "parser_lane": "full_parser",
+  "accepted_contract": "02_analysis/llloom_okf_consumer_contract_and_fixture_plan.md",
+  "note": "llloom-owned cases only. The pinned upstream corpus at tests/fixtures/okf_profile/ is consumed unchanged as committed input bytes and is neither restated nor forked here.",
+  "six_columns": [
+    "markdown_framing",
+    "yaml_parse",
+    "okf_concept",
+    "framework_profile",
+    "marker_health",
+    "execution_eligibility"
+  ],
+  "observation_fields": [
+    "read_status",
+    "okf_concept_result",
+    "okf_concept_reason",
+    "framework_profile_result",
+    "framework_profile_reason",
+    "execution_eligibility",
+    "declared_framework_profile"
+  ],
+  "cases": [
+    {
+      "id": "L01",
+      "title": "legacy page: the M000 `page create` stub text with its frontmatter block removed",
+      "provenance": "derived from the M000 page-create golden text by deleting the frontmatter block",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L01_legacy_no_frontmatter.md",
+      "sha256": "a302354bca14537159d6790f94b27f010524d2a2a9cedae7c0ee771d3f19912c",
+      "bytes": 206,
+      "row": "R3",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "absent",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "not_evaluated",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "not_applicable",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "not_evaluated",
+        "okf_concept_reason": null,
+        "framework_profile_result": "not_applicable",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L04",
+      "title": "profiled llloom page: native flat keys plus the two-field profile minimum",
+      "provenance": "derived from the M000 page-create golden text by adding `type` and `framework_profile`",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L04_profiled_page.md",
+      "sha256": "70f9e57bd2339ea0258533cc6684fd0881c055344dced8f89896edc76605b1c8",
+      "bytes": 336,
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "L05",
+      "title": "profile-valid frontmatter with a malformed marker arrangement",
+      "provenance": "derived from L04 by truncating the claim-block region",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L05_profile_valid_malformed_markers.md",
+      "sha256": "1f2769329f73355f2e65e31a04908ef3fbc1a08c174ce3a2116993740388dc42",
+      "bytes": 110,
+      "row": "R14",
+      "marker_class": "M2",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "parse_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "L06",
+      "title": "invalid YAML frontmatter with well-formed markers",
+      "provenance": "authored: tab-indent syntax defect",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L06_invalid_yaml_good_markers.md",
+      "sha256": "470bcb9f21259ea5dc0ebab2b6455b3a2947a8252975059d7e1947aa343d8d24",
+      "bytes": 180,
+      "row": "R7",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "invalid",
+        "okf_concept": {
+          "result": "fail",
+          "reason": "OKF_YAML_INVALID"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "parse_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "fail",
+        "okf_concept_reason": "OKF_YAML_INVALID",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L07",
+      "title": "semantic duplicate mapping key with well-formed markers",
+      "provenance": "authored: `type` declared twice",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L07_duplicate_keys_good_markers.md",
+      "sha256": "31cb5bce8991491c6303752b744858ff82904ec06de2547a4cfe151a65646091",
+      "bytes": 184,
+      "row": "R8",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "fail",
+          "reason": "OKF_YAML_INVALID"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "fail",
+        "okf_concept_reason": "OKF_YAML_INVALID",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L08",
+      "title": "profile-valid page carrying no marker regions at all",
+      "provenance": "derived from L04 by removing both marker pairs",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L08_profile_valid_no_markers.md",
+      "sha256": "7bfcb70240abb60cc156b6a60fbf8625e22952417368f0bde8e0a8268d6e4493",
+      "bytes": 69,
+      "row": "R14",
+      "marker_class": "M2",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "parse_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "L09",
+      "title": "profiled page carrying an `llloom:` namespace mapping and an unknown key",
+      "provenance": "authored: unknown-field and tool-namespace tolerance",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L09_llloom_namespace_unknown_key.md",
+      "sha256": "1825a8c0a90b71402bdb36116b7e60470cca77bce574a1aa90d57cd854268e8b",
+      "bytes": 258,
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "L10",
+      "title": "profiled page carrying another tool's unknown namespace",
+      "provenance": "authored: a foreign namespace must be tolerated and never interpreted",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L10_other_tool_namespace.md",
+      "sha256": "3d3f1ca3b1e4f33ec62e48f607a71d23e8b617f74b5511b218d886e9a7723244",
+      "bytes": 226,
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "L11",
+      "title": "page declaring a framework_profile version the candidate does not support",
+      "provenance": "authored",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L11_unsupported_profile_version.md",
+      "sha256": "615cbd4763c27f77e02dcb074bbcd000b290e4d88c3af74609b0d00c62d5e4c6",
+      "bytes": 202,
+      "row": "R13",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_VERSION_UNSUPPORTED"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_VERSION_UNSUPPORTED",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "9.9-rc.9"
+      }
+    },
+    {
+      "id": "L12",
+      "title": "page declaring a registry-external `type`",
+      "provenance": "authored",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L12_registry_external_type.md",
+      "sha256": "145f86d8d4ce76dab13fd3b184ed0c9d72e145c3184bf1fffbcabb6f6b9f7c1e",
+      "bytes": 208,
+      "row": "R11",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_TYPE_UNSUPPORTED"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_TYPE_UNSUPPORTED",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L14",
+      "title": "opening delimiter with no closing delimiter, markers well formed",
+      "provenance": "authored",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L14_unterminated_framing.md",
+      "sha256": "0587dcc5406d9ed6ff3c0d39cd935a9eedff13f20ae47a8e19d60aa056f5fa03",
+      "bytes": 184,
+      "row": "R4",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "unterminated",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "fail",
+          "reason": "OKF_FRONTMATTER_MISSING"
+        },
+        "framework_profile": {
+          "result": "not_applicable",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "fail",
+        "okf_concept_reason": "OKF_FRONTMATTER_MISSING",
+        "framework_profile_result": "not_applicable",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L15",
+      "title": "a blank line before the opening delimiter, so framing is absent",
+      "provenance": "authored",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L15_blank_line_before_delimiter.md",
+      "sha256": "a68cf3710f3e154debc7e9891e90756cbe964d1375306787b8a287d0c8df8bf5",
+      "bytes": 203,
+      "row": "R3",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "absent",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "not_evaluated",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "not_applicable",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "not_evaluated",
+        "okf_concept_reason": null,
+        "framework_profile_result": "not_applicable",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L16",
+      "title": "more than one YAML document inside the frontmatter block",
+      "provenance": "authored: a document-end marker followed by further content",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L16_multi_document_frontmatter.md",
+      "sha256": "883655e7367d70531f1f59eaa9c9bc680228d60d98173ad07632ed0a2dd8cc78",
+      "bytes": 188,
+      "row": "R7",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "invalid",
+        "okf_concept": {
+          "result": "fail",
+          "reason": "OKF_YAML_INVALID"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "parse_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "fail",
+        "okf_concept_reason": "OKF_YAML_INVALID",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L17",
+      "title": "page bytes that are not decodable as UTF-8",
+      "provenance": "authored: a NUL byte marks the payload binary for tooling, and the 0xff sequence makes the bytes undecodable",
+      "kind": "committed_bytes",
+      "path": "tests/fixtures/okf_pages/L17_undecodable_bytes.bin",
+      "sha256": "b5f26632026d03d50de01ed1badafe564761224f0f260ef183258645aba7f1c6",
+      "bytes": 37,
+      "row": "R2",
+      "marker_class": "M3",
+      "expected_columns": {
+        "markdown_framing": "not_read",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "not_evaluated",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "not_applicable",
+          "reason": null
+        },
+        "marker_health": "not_observed",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "undecodable",
+        "okf_concept_result": "not_evaluated",
+        "okf_concept_reason": null,
+        "framework_profile_result": "not_applicable",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L02",
+      "title": "today's llloom page: the four native flat keys only",
+      "provenance": "golden: the exact text `llloom.ops.page._render_stub` produces for `concept/m000-demo`. The M000 evidence records its Windows byte form, which is CRLF because the native writer translates newlines; the CRLF encoding of this text has SHA-256 7cbd75e8e7b31ab829b5e5a719241a15657d2cbb0d3afa4206f887783c243a2e. It is therefore built in a temporary workspace rather than committed, because the repository forbids shipping CRLF text.",
+      "kind": "constructed",
+      "construction": "write llloom.ops.page._render_stub(page_id='concept/m000-demo', page_class='concept', title='M000 Demo', claim_block_id='claim_block.concept.m000-demo', commentary_id='commentary.concept.m000-demo') to a temporary page path",
+      "row": "R9",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "fail",
+          "reason": "OKF_TYPE_MISSING"
+        },
+        "framework_profile": {
+          "result": "not_applicable",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "fail",
+        "okf_concept_reason": "OKF_TYPE_MISSING",
+        "framework_profile_result": "not_applicable",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      },
+      "m000_crlf_sha256": "7cbd75e8e7b31ab829b5e5a719241a15657d2cbb0d3afa4206f887783c243a2e"
+    },
+    {
+      "id": "L03",
+      "title": "starter overview page written by workspace init",
+      "provenance": "golden: `llloom.workspace.layout._STARTER_OVERVIEW`. Its M000 Windows byte form is CRLF with SHA-256 09a4577c0301cf20ff8cc178ceba6b5ad5aee841fdde6cb34f7aefb246254533; built in a temporary workspace for the same reason as L02. The page carries no marker pairs, so its observed marker health is `parse_error`.",
+      "kind": "constructed",
+      "construction": "write llloom.workspace.layout._STARTER_OVERVIEW to a temporary page path",
+      "row": "R9",
+      "marker_class": "M2",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "fail",
+          "reason": "OKF_TYPE_MISSING"
+        },
+        "framework_profile": {
+          "result": "not_applicable",
+          "reason": null
+        },
+        "marker_health": "parse_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "fail",
+        "okf_concept_reason": "OKF_TYPE_MISSING",
+        "framework_profile_result": "not_applicable",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      },
+      "m000_crlf_sha256": "09a4577c0301cf20ff8cc178ceba6b5ad5aee841fdde6cb34f7aefb246254533"
+    },
+    {
+      "id": "L13",
+      "title": "CRLF-framed page, otherwise identical to L04",
+      "provenance": "derived from L04 by replacing every LF with CRLF. Built in a temporary workspace because the repository forbids shipping CRLF text. Pins finding F3: the profile layers pass while the native parser reports an empty frontmatter mapping.",
+      "kind": "constructed",
+      "construction": "write the L04 fixture text with every LF replaced by CRLF",
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "L18",
+      "title": "observation target that does not exist",
+      "provenance": "authored: a path inside a temporary workspace that is never created.",
+      "kind": "constructed",
+      "construction": "resolve a page path inside a temporary workspace and never create it",
+      "row": "R0",
+      "marker_class": "M3",
+      "expected_columns": {
+        "markdown_framing": "not_read",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "not_evaluated",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "not_applicable",
+          "reason": null
+        },
+        "marker_health": "missing_page",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "target_absent",
+        "okf_concept_result": "not_evaluated",
+        "okf_concept_reason": null,
+        "framework_profile_result": "not_applicable",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "L19",
+      "title": "present regular target whose metadata or bytes cannot be read",
+      "provenance": "authored: an injected permission/sharing OSError on a regular file whose stat reports a regular mode",
+      "kind": "constructed",
+      "construction": "create a regular page, then inject a PermissionError from either Path.stat or open; FileNotFoundError and NotADirectoryError stay R0",
+      "row": "R0U",
+      "marker_class": "M3",
+      "expected_columns": {
+        "markdown_framing": "not_read",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "not_evaluated",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "not_applicable",
+          "reason": null
+        },
+        "marker_health": "not_observed",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "unreadable",
+        "okf_concept_result": "not_evaluated",
+        "okf_concept_reason": null,
+        "framework_profile_result": "not_applicable",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    }
+  ],
+  "hostile_cases": [
+    {
+      "id": "H01-max",
+      "ceiling": "total artifact bytes",
+      "declared_value": 1048576,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "a profile-valid page padded with 'a' to exactly the ceiling",
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "H01-plus1",
+      "ceiling": "total artifact bytes",
+      "declared_value": 1048576,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same page at exactly ceiling + 1 bytes",
+      "row": "R1",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "not_read",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "oversize",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H02-max",
+      "ceiling": "frontmatter block bytes",
+      "declared_value": 65536,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "a profile-valid block padded with 6000-character double-quoted values to exactly the ceiling; longest line 6008",
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "H02-plus1",
+      "ceiling": "frontmatter block bytes",
+      "declared_value": 65536,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same block at exactly ceiling + 1 bytes",
+      "row": "R5",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H03-max",
+      "ceiling": "frontmatter lines",
+      "declared_value": 500,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "a profile-valid block of exactly 500 lines, each `kN: \"v\"`",
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "H03-plus1",
+      "ceiling": "frontmatter lines",
+      "declared_value": 500,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same block at exactly 501 lines",
+      "row": "R5",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H04-max",
+      "ceiling": "single line length",
+      "declared_value": 8192,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "one double-quoted value line of exactly 8192 characters",
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "H04-plus1",
+      "ceiling": "single line length",
+      "declared_value": 8192,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same line at exactly 8193 characters",
+      "row": "R5",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "not_attempted",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H06-max",
+      "ceiling": "unique graph nodes",
+      "declared_value": 2000,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "chunked flow sequences of 1989 double-quoted items: exactly 2000 unique nodes, 4002 scanned tokens",
+      "row": "R10",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H06-plus1",
+      "ceiling": "unique graph nodes",
+      "declared_value": 2000,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same construction at exactly 2001 unique nodes",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H07-max",
+      "ceiling": "traversal depth",
+      "declared_value": 32,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "32 nested block mappings with a double-quoted leaf",
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "H07-plus1",
+      "ceiling": "traversal depth",
+      "declared_value": 32,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "33 nested block mappings",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H08-max",
+      "ceiling": "scalar length",
+      "declared_value": 16384,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "a double-quoted scalar folded across 3 lines whose folded value length is exactly 16384; longest line 5467",
+      "row": "R14",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "pass",
+          "reason": null
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "pass",
+        "framework_profile_reason": null,
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": "0.1-rc.1"
+      }
+    },
+    {
+      "id": "H08-plus1",
+      "ceiling": "scalar length",
+      "declared_value": 16384,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same scalar at folded length exactly 16385",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H09-max",
+      "ceiling": "mapping items",
+      "declared_value": 500,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "one flow mapping of exactly 500 entries",
+      "row": "R10",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H09-plus1",
+      "ceiling": "mapping items",
+      "declared_value": 500,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same flow mapping with exactly 501 entries",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H10-max",
+      "ceiling": "sequence items",
+      "declared_value": 1000,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "one flow sequence of exactly 1000 items",
+      "row": "R10",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H10-plus1",
+      "ceiling": "sequence items",
+      "declared_value": 1000,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same flow sequence with exactly 1001 items",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H11-max",
+      "ceiling": "alias count",
+      "declared_value": 50,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "one anchor plus exactly 50 aliases in a chunked flow sequence",
+      "row": "R10",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H11-plus1",
+      "ceiling": "alias count",
+      "declared_value": 50,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same anchor with exactly 51 aliases",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H05-max",
+      "ceiling": "scanned tokens",
+      "declared_value": 10000,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "frontmatter `type: page` / `framework_profile: \"0.1-rc.1\"` / `data: [` then exactly 9983 commas split across lines of at most 6000 characters, then `]`; exactly 10000 scanned tokens",
+      "row": "R7",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "invalid",
+        "okf_concept": {
+          "result": "fail",
+          "reason": "OKF_YAML_INVALID"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "parse_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "fail",
+        "okf_concept_reason": "OKF_YAML_INVALID",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H05-plus1",
+      "ceiling": "scanned tokens",
+      "declared_value": 10000,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "the same construction with exactly 9984 commas; exactly 10001 scanned tokens",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "parse_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H05-nearmax",
+      "ceiling": "scanned tokens (supplemental, not a boundary case)",
+      "declared_value": 10000,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "chunked flow sequences of 1988 double-quoted items: 4000 scanned tokens, 1999 unique nodes",
+      "row": "R10",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "composed",
+        "okf_concept": {
+          "result": "pass",
+          "reason": null
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "pass",
+        "okf_concept_reason": null,
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H05-order",
+      "ceiling": "scanned tokens (supplemental, not a boundary case)",
+      "declared_value": 10000,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "chunked flow sequences of 4993 double-quoted items followed by a tab-indented line; the scan aborts at token 10001 before the later defect",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "parse_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H12-cycle",
+      "ceiling": "alias cycle (no numeric maximum)",
+      "declared_value": null,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "`cycle: &c` with a nested `self: *c`",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "ok",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    },
+    {
+      "id": "H13-recursion",
+      "ceiling": "pathological recursion (no numeric maximum)",
+      "declared_value": null,
+      "provenance": "authored",
+      "kind": "constructed",
+      "construction": "`x: ` followed by 1500 `[` characters and 1500 `]` characters on one line",
+      "row": "R6",
+      "marker_class": "M1",
+      "expected_columns": {
+        "markdown_framing": "terminated",
+        "yaml_parse": "refused_bounded",
+        "okf_concept": {
+          "result": "unverified",
+          "reason": "OKF_PARSE_LIMIT_EXCEEDED"
+        },
+        "framework_profile": {
+          "result": "fail",
+          "reason": "PROFILE_YAML_OUT_OF_SUBSET"
+        },
+        "marker_health": "native_error",
+        "execution_eligibility": "not_evaluated"
+      },
+      "expected_observation": {
+        "read_status": "ok",
+        "okf_concept_result": "unverified",
+        "okf_concept_reason": "OKF_PARSE_LIMIT_EXCEEDED",
+        "framework_profile_result": "fail",
+        "framework_profile_reason": "PROFILE_YAML_OUT_OF_SUBSET",
+        "execution_eligibility": "not_evaluated",
+        "declared_framework_profile": null
+      }
+    }
+  ],
+  "compatibility_cases": [
+    {
+      "id": "P01",
+      "case": "`list-pages` over a workspace holding L01, L02, and L04",
+      "expectation": "byte-identical output before and after M002; no new field, key, or reordering"
+    },
+    {
+      "id": "P02",
+      "case": "`lint` over the same workspace",
+      "expectation": "unchanged; zero failures, warnings, and canary hits attributable to profile status"
+    },
+    {
+      "id": "P03",
+      "case": "`doctor` over the same workspace",
+      "expectation": "unchanged; only the two informational rebuildable sidecar warnings"
+    },
+    {
+      "id": "P04",
+      "case": "CLI JSON for `list-pages` and `list-render-targets`",
+      "expectation": "unchanged key sets"
+    },
+    {
+      "id": "P05",
+      "case": "ingest -> verify -> render -> query cycle",
+      "expectation": "unchanged, including the M000 excerpt hash"
+    },
+    {
+      "id": "P06",
+      "case": "public surface inventory",
+      "expectation": "26 CLI verbs, root __all__ of one name, 34 result dataclasses, 6 MCP tools"
+    },
+    {
+      "id": "P07",
+      "case": "`page create` without opt-in",
+      "expectation": "byte-identical to the M000 golden"
+    }
+  ],
+  "amendment": "02_analysis/llloom_okf_consumer_contract_and_fixture_plan.md, section 'M002 Change-Control Amendment - 2026-07-31'",
+  "read_status_vocabulary": [
+    "ok",
+    "target_absent",
+    "oversize",
+    "undecodable",
+    "unreadable"
+  ],
+  "safety_constants": {
+    "max_artifact_bytes": 1048576,
+    "max_frontmatter_bytes": 65536,
+    "max_frontmatter_lines": 500,
+    "max_line_length": 8192,
+    "max_tokens": 10000,
+    "max_nodes": 2000,
+    "max_depth": 32,
+    "max_scalar_length": 16384,
+    "max_mapping_items": 500,
+    "max_sequence_items": 1000,
+    "max_aliases": 50
+  },
+  "framing_contract": {
+    "line_terminators": [
+      "LF",
+      "CRLF"
+    ],
+    "not_line_terminators": [
+      "bare CR",
+      "VT",
+      "FF",
+      "NEL",
+      "Unicode line separator",
+      "Unicode paragraph separator"
+    ],
+    "frontmatter_byte_measurement": "raw source bytes between the delimiter lines, CRLF sequences counted as two bytes and never normalized before the ceiling check"
+  },
+  "lexeme_contract": {
+    "rule": "source content of the scalar with only matching syntactic quote delimiters stripped, before YAML escape normalization",
+    "examples": [
+      {
+        "source": "0.1-rc.1",
+        "returned": "0.1-rc.1",
+        "matches_candidate": true
+      },
+      {
+        "source": "\"0.1-rc.1\"",
+        "returned": "0.1-rc.1",
+        "matches_candidate": true
+      },
+      {
+        "source": "\"0.1<BS>x2drc.1\"",
+        "returned": "0.1<BS>x2drc.1",
+        "matches_candidate": false
+      },
+      {
+        "source": "\"0.1<BS>u002drc.1\"",
+        "returned": "0.1<BS>u002drc.1",
+        "matches_candidate": false
+      },
+      {
+        "source": "\"9.9<BS>x2drc.9\"",
+        "returned": "9.9<BS>x2drc.9",
+        "matches_candidate": false
+      }
+    ],
+    "backslash_placeholder": "<BS>",
+    "placeholder_note": "A literal backslash in a source spelling is written as <BS> so this manifest carries no sequence that reads as a UNC path to repository tooling. Substitute chr(92) for <BS> to obtain the exact bytes."
+  }
+}

@@ -1,0 +1,9 @@
+# Structured fixture.
+#
+# Intended for the structure_extract policy path.
+# The first slice registers this source and records its hash but does
+# not extract structure; tree-sitter integration is deferred.
+service:
+  name: example
+  retries: 3
+  timeout_ms: 500

@@ -1,0 +1,109 @@
+# Synthetic fixture manifest.
+#
+# Scope and intent
+# ----------------
+# Documents the six synthetic fixture directories under
+# ``08_pkg/tests/fixtures/synthetic/``. For each directory, names the
+# invariant the fixture proves and the test file(s) that exercise the
+# scenario. Some fixture directories are actively consumed (a test
+# reads files from the directory at runtime). Others are
+# documentation-only: the scenario is implemented inline in the test
+# code, and the fixture directory exists to record the canonical
+# example in a single place that survives across test refactors.
+#
+# When a fixture entry has consumer tests, the
+# ``test_synthetic_fixture_manifest.py`` guard asserts every listed
+# test file references either the fixture directory name or one of
+# its listed files. Documentation-only entries (``documentation_only:
+# true``) skip the reference check; their guard is only that the
+# directory and the named scenario-implementing test files exist.
+#
+# Schema
+# ------
+# fixtures:
+#   - directory: <name under tests/fixtures/synthetic/>
+#     invariant: <one-sentence description of what the fixture proves>
+#     files: [<filename>, ...]   # may be empty for documentation-only
+#     tests: [<workspace-relative path to a tests/ file>, ...]
+#     documentation_only: true | false   # default false
+
+fixtures:
+  - directory: aliases
+    invariant: >-
+      Variant spellings of the same display name must stay separate
+      (write-as-new, queue-for-merge); identical display names queue
+      a merge proposal that must be explicitly approved or rejected
+      before any alias edges land.
+    files:
+      - doc_a.md
+      - doc_b.md
+    tests:
+      - tests/integration/test_alias_queue.py
+    documentation_only: true
+
+  - directory: canary
+    invariant: >-
+      Fixed-token canary planted in commentary and editorial spine
+      must never leak into rendered claim blocks, claim records,
+      query answers, or invocation-log output. Lint flags any
+      forbidden observation point that surfaces the token.
+    files:
+      - canary_page.md
+      - spine_overview.md
+    tests:
+      - tests/contract/test_canary_exclusion.py
+    documentation_only: false
+
+  - directory: concurrency
+    invariant: >-
+      Workspace-scoped file lock plus journal-backed stale recovery
+      lets a second op refuse cleanly when a first op holds the
+      lock, lets reconcile clear only timed-out locks whose journal
+      is still in_progress, and lets the second op retry once
+      reconcile has finished.
+    files: []
+    tests:
+      - tests/contract/test_lock_and_reconcile.py
+      - tests/contract/test_stale_lock_journal_rule.py
+    documentation_only: true
+
+  - directory: denied
+    invariant: >-
+      A source class mapped to policy ``deny`` is refused at ingest
+      with a clear refusal_reason and no partial state; the source
+      registry records nothing on the refused path.
+    files:
+      - fake_credentials.md
+    tests:
+      - tests/integration/test_ingest_and_render.py
+    documentation_only: true
+
+  - directory: precision_critical
+    invariant: >-
+      Sources whose ingest policy resolves to ``index_only`` are
+      registered and hashed, but their raw bodies never enter
+      ``LLMInvoke`` as ``SourceDocument`` inputs. Deterministic
+      bounded verbatim retrieval at the ``query`` surface produces
+      ``VerbatimSpan`` results with matching ``excerpt_hash``.
+    files:
+      - contract_clause.md
+    tests:
+      - tests/contract/test_index_only_strict.py
+      - tests/contract/test_index_only_query_safety.py
+      - tests/integration/test_index_only_query.py
+    documentation_only: true
+
+  - directory: structured
+    invariant: >-
+      A ``structured_yaml`` source is ingested under
+      ``structure_extract`` policy, producing a non-canonical
+      derived report under ``state/structure/<source_id>.yaml``
+      with structure metadata only (mapping keys, ``code_v1``
+      locators) — never scalar values, comments, or multiline
+      bodies. ``structure_extract`` never invokes ``LLMInvoke``.
+    files:
+      - sample.yaml
+    tests:
+      - tests/unit/test_structure_extract.py
+      - tests/contract/test_structure_extract_ingest.py
+    documentation_only: true
