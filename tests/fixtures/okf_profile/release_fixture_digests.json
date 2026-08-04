@@ -1,0 +1,104 @@
+{
+  "schema": "llloom.release_fixture_digests.v1",
+  "template_baseline_commit": "97ab4cd6b4f6f890d81c2738885051f2c4f79bc4",
+  "source_pin_manifest_sha256": "abf6a0c25fa3a1ed3e05f9304cb693a294d83a3771c117ecc1375cbc56abbb86",
+  "digest_basis": "committed_git_blob_bytes",
+  "fixtures": [
+    {
+      "path": "tests/fixtures/okf_profile/accepted_full.md",
+      "sha256": "8ab5d9da183209bef7646c4e988147eef0b3c799736051acd34f7e9c2cc90f07"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/accepted_minimal.md",
+      "sha256": "7a04d05f405a61b54e7c3a8f5c708f5e14842fd44ab534aac3a134cbf86deb28"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/accepted_no_profile_field.md",
+      "sha256": "7ccc3f038ba8302b0e0a74fff9d1a607e95c709ab73d62f8d77c6a8a987c5b33"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/accepted_quoted_numeric.md",
+      "sha256": "944ac4e268a7689153a1601c70a0cb46589a8c3035f4eea7871f8dc6d25a0aad"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/accepted_unknown_extension.md",
+      "sha256": "1f64b3b806714eaef2fc7b9dd7a3be7efc7d2a3bc5cf84322a1cbd0e42e23de0"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/anchors_aliases.md",
+      "sha256": "339f00535c3bd8a9c9f0b1611e8e47fa96a946d27daf959d4faa3f08636a1ec8"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/duplicate_key.md",
+      "sha256": "156c89451dafc7e9b48d13929e98a630ef82b8c42348e3ba2e0c3f646cd5f79f"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/flow_collection.md",
+      "sha256": "167a7ad406215432469f9f4f30e3d06ae1c89701324497020c7b0bae279d7148"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/frontmatter_unterminated.md",
+      "sha256": "3e5132781878b4636de7a48c2992c7467e3732a3ed3edc2285bc034a762f7117"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/legacy_no_frontmatter.md",
+      "sha256": "3478428621d6ba90151f0986b851c3b942fded3b90887b8ef67485907d65e7a2"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/merge_keys.md",
+      "sha256": "98e25b28f5880975c77237514a0c241b8237821cbe152737be093248325e756e"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/moved/original.md",
+      "sha256": "77a368f468e781b6e14aba93e3cff59e4a0ea961e62e87c5a6cc1b063cfb0a78"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/moved/relocated.md",
+      "sha256": "c5867519ff1912e43c7a3af4921ce96c138f02abe246d2774ee71519bdd16e53"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/scalar_leading_zero.md",
+      "sha256": "6cc872045a302e92c92936b9045554ddee08e522dde477a98645594520eabc9a"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/scalar_native_timestamp.md",
+      "sha256": "ea0ec47bb549dd358317bb0d25a0d1440ef3973cbaab60baeef887f5912c1c29"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/scalar_unquoted_bool.md",
+      "sha256": "ef0c9ad61ea464d3eec4fcdbff94677a0147cbcfee5d775cb6671e1c250dd764"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/sem_equiv_key_order_a.md",
+      "sha256": "47d6d36a9e480db2b7a732af91bfd0dc6b79ae84f47fd87ad7e48a3008601636"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/sem_equiv_key_order_b.md",
+      "sha256": "fdeebd84a9ee791212f9507d2d0b9817cb1476a35388cc836195f16d4646222b"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/tool_namespace.md",
+      "sha256": "993601aefb3a94059280863a478d19eccba0d6db6107508f64e66861a4c7fb56"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/type_empty.md",
+      "sha256": "9eba7d37aa4affab58b72cdc78a36456512caeede574f9d7c67a772be60b795e"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/type_missing.md",
+      "sha256": "aa685f68d61bf87a3664f4180c52e4349f15e0ad918837db1b2057b9a627e331"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/type_unknown.md",
+      "sha256": "b945ad416b37098eb703e8dc670ac825072d3e12987fc7207afd5c56d7d9a8fb"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/version_mixed_newer_rc.md",
+      "sha256": "a593eb0de4a570b7a0889c52a081ae74ff231c343f02bb0b454790cc19040cab"
+    },
+    {
+      "path": "tests/fixtures/okf_profile/version_unknown.md",
+      "sha256": "1099e25de4d91d275237c9c69524eb57d4c274e0458b91d8d148ba6f1f63cc1c"
+    }
+  ]
+}

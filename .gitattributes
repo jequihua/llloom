@@ -1,0 +1,8 @@
+# Every text file in this repository checks out LF on every platform, so a
+# fresh clone reproduces the committed bytes regardless of core.autocrlf.
+# `text=auto` keeps a future binary asset from being corrupted.
+* text=auto eol=lf
+
+# The one accepted binary fixture (an intentionally undecodable byte sequence
+# used by the input-safety tests) must never be normalized or treated as text.
+tests/fixtures/okf_pages/L17_undecodable_bytes.bin binary
